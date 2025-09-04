@@ -25,3 +25,16 @@
 | 19  | Wrote a professional penetration test report                       | [Week 3 Artifacts Summary](https://github.com/RezaAramjou/portfolio/blob/main/ARTIFACTS.md) | ✅ Complete |
 | 20  | Remediated vulnerabilities and re-tested to verify fixes           | [Week 3 Artifacts Summary](https://github.com/RezaAramjou/portfolio/blob/main/ARTIFACTS.md) | ✅ Complete |
 | 21  | Published Week 3 deliverable (Artifacts Summary)                   | [Week 3 Artifacts Summary](https://github.com/RezaAramjou/portfolio/blob/main/ARTIFACTS.md) | ✅ Complete |
+
+---
+### Week 4: Polish, Interview Kit, and Capstone
+
+| Day | Task                                                               | Link                                                                                  | Status      |
+|-----|--------------------------------------------------------------------|---------------------------------------------------------------------------------------|-------------|
+| 22  | Created Capstone Executive Summary & Architecture Diagram          | [Capstone Summary](https://github.com/YourGitHubUsername/portfolio/blob/main/CAPSTONE.md) | ✅ Complete |
+| 23  | *(Skipped)* Technical Walkthrough Videos                           | N/A                                                                                   | N/A         |
+| 24  | Wrote 10 Resume Bullets Tailored for Cloud/Security Roles          | [Resume Bullets](https://github.com/YourGitHubUsername/job-kit/blob/main/resume-bullets.md) | ✅ Complete |
+| 25  | Prepared Mock Interview Q&A Document                               | [Interview Q&A](https://github.com/YourGitHubUsername/job-kit/blob/main/mock-interviews/README.md) | ✅ Complete |
+| 26  | Finalized all repository READMEs for clarity and reproducibility   | N/A                                                                                   | ✅ Complete |
+| 27  | Wrote Full Capstone Document with Threat Model and Mitigations     | [Full Capstone](https://github.com/YourGitHubUsername/portfolio/blob/main/CAPSTONE_FULL.md) | ✅ Complete |
+| 28+ | Polished documentation and prepared job application materials      | [Cover Letters](https://github.com/YourGitHubUsername/job-kit/tree/main/cover-letters) | ✅ Complete |

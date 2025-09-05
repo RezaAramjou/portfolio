@@ -51,3 +51,12 @@
 * `pentest/ROE.md`
 * `siem-lab/baseline/host-baseline.md`
 * `siem-lab/dashboards/baseline.png`
+
+## Day 2: External Recon & Wordlists (2025-09-05)
+
+*Summary:* Performed external reconnaissance against the Juice Shop web application. I used nmap for port scanning, whatweb for technology fingerprinting, and a fine-tuned gobuster scan to discover key directories like `/api` and `/ftp`. Based on these findings, I created a custom wordlist and wrote a Sigma-style detection rule to identify directory enumeration activity.
+
+*Deliverables:*
+* `pentest/recon/recon-notes.md`
+* `pentest/wordlists/custom.txt`
+* `siem-lab/rules/web-dirbusting.yml`

@@ -143,3 +143,13 @@ developed during the project.
         [siem-lab/rules/linux-sudo-anomaly.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/linux-sudo-anomaly.yml)
     -   **Pentest Notes**:
         [pentest/linux/privesc-methods.md](https://github.com/RezaAramjou/pentest/blob/main/linux/privesc-methods.md)
+        
+### 5.4. Authentication & Session Security
+
+* **Threat**: An attacker could use brute-force password guessing to gain unauthorized access or steal a session token via another vulnerability (like XSS) to hijack a legitimate user's session.
+* **Detection**: Rules were created to detect both brute-force patterns (a high number of failed logins from one IP) and session anomalies (a valid token being used from a new IP address or browser).
+* **Evidence**:
+    * **Detection Rules**: 
+        * [siem-lab/rules/auth-brute.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/auth-brute.yml)
+        * [siem-lab/rules/auth-token-anomaly.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/auth-token-anomaly.yml)
+    * **Pentest Findings**: [pentest/web/auth-findings.md](https://github.com/RezaAramjou/pentest/blob/main/web/auth-findings.md)

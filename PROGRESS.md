@@ -70,10 +70,19 @@
 * `pentest/web/proxy-export.xml`
 * `siem-lab/parsers/web-headers.md`
 
-## Day 4: Input Validation & File Handling Tests (2025-09-05)
+## Day 4: Input Validation & File Handling Tests (2025-09-06)
 
 *Summary:* Shifted focus to planning active tests by creating a systematic test catalog for the Juice Shop application. The plan outlines methodologies for identifying vulnerabilities like SQLi, XSS, and insecure file uploads without using live payloads. In parallel, I developed a corresponding defensive rule to detect suspicious file uploads based on dangerous extensions or MIME type mismatches.
 
 *Deliverables:*
 * `pentest/web/test-catalog.md`
 * `siem-lab/rules/suspicious-file-upload.yml`
+
+## Day 5: AuthZ/AuthN Weaknesses (2025-09-06)
+
+*Summary:* Conducted an assessment of the web application's authentication and session management controls. I identified several weaknesses, including a weak password policy, no account lockout mechanism, and improper session invalidation on logout. To counter these threats, I designed two new detection rules: one to identify brute-force login attempts and another to detect session hijacking via token anomalies.
+
+*Deliverables:*
+* `pentest/web/auth-findings.md`
+* `siem-lab/rules/auth-brute.yml`
+* `siem-lab/rules/auth-token-anomaly.yml`

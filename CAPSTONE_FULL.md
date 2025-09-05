@@ -1,109 +1,137 @@
-# Full Capstone Project Report: Building a Secure Cloud & Pentesting Lab
+------------------------------------------------------------------------
 
-**Author**: Reza Aramjou
-**Date**: September 3, 2025
+# Full Capstone Project Report: End-to-End Pentesting and Detection Engineering
 
----
+**Author**: Reza Aramjou **Date**: \[2025.09.06\]
 
-## 1. Introduction & Project Goal
-
-The objective of this 30-day project was to demonstrate a comprehensive, hands-on understanding of modern cybersecurity and DevOps practices. This was accomplished by building a complete, end-to-end lab environment that encompassed Infrastructure as Code (IaC), CI/CD automation, offensive penetration testing of a web application, and defensive monitoring with a SIEM.
-
-This document provides a detailed overview of the project's architecture, a threat model of the environment, a summary of implemented mitigations, and a full guide to reproducing the lab.
-
----
+------------------------------------------------------------------------
 
 ## 2. Detailed Architecture
 
-The lab is comprised of a host machine and a single "attacker" virtual machine, simulating an external threat actor and an internal "server" environment.
+The lab is comprised of three distinct components, simulating an
+analyst's workstation, an attacker's machine, and a target server.
 
-* **Host Machine (Ubuntu)**: Acts as the server environment. It runs Docker to host two key containerized services:
-    * **OWASP Juice Shop**: A deliberately insecure web application used as the penetration testing target.
-    * **Splunk Enterprise**: A Security Information and Event Management (SIEM) platform used for log collection and analysis.
-* **Kali Linux VM**: Acts as the attacker machine. It is connected to the host via a VirtualBox Host-Only network, providing network access for scanning and exploitation while remaining isolated from the internet.
-* **Networking**: A private `192.168.56.0/24` network facilitates communication between the attacker VM and the host services.
+-   **Main OS (Ubuntu)**: The **Analyst Workstation**. This machine
+    serves as the "office" and hosts all project repositories, including
+    `portfolio`, `pentest`, and `siem-lab`, where all documentation,
+    findings, and detection rules are developed.
+-   **Kali Linux VM**: The dedicated **Attacker Machine**. It is
+    connected to the target via a VirtualBox Host-Only network and is
+    used to conduct all offensive activities, from reconnaissance to
+    exploitation.
+-   **Ubuntu Server VM**: The **Target Host**. This server runs Docker
+    to host the primary target, **OWASP Juice Shop**, and is the focal
+    point for all monitoring. It generates the logs (web server,
+    `auditd`) that are conceptually forwarded to a SIEM.
+-   **Networking**: A private `192.168.56.0/24` network facilitates
+    communication between the attacker VM and the target host, creating
+    an isolated and safe testing environment.
 
-This architecture provides a safe and realistic sandbox for performing penetration tests and monitoring the resulting network and application log data.
-
-![Project Architecture Diagram](assets/architecture.png)
-
----
+------------------------------------------------------------------------
 
 ## 3. How to Reproduce the Lab
 
-The following steps outline how to set up and run the entire lab environment from scratch.
+The following steps outline how to set up and run the entire lab
+environment.
 
 ### Prerequisites
-* Git
-* VirtualBox
-* Docker & Docker Compose
+
+-   Git
+-   VirtualBox
+-   Docker & Docker Compose
 
 ### Step 1: Clone All Repositories
-Clone all the necessary project repositories to your local machine.
-```bash
-git clone [https://github.com/RezaAramjou/portfolio.git](https://github.com/RezaAramjou/portfolio.git)
-git clone [https://github.com/RezaAramjou/labs.git](https://github.com/RezaAramjou/labs.git)
-git clone [https://github.com/RezaAramjou/pentest.git](https://github.com/RezaAramjou/pentest.git)
-# Add other repos as needed...
+
+Clone all project repositories to your **Main OS (Ubuntu)**.
+
+``` bash
+git clone https://github.com/RezaAramjou/portfolio.git
+git clone https://github.com/RezaAramjou/labs.git
+git clone https://github.com/RezaAramjou/pentest.git
+git clone https://github.com/RezaAramjou/siem-lab.git
 ```
 
-### Step 2: Set Up the Server Environment (Host Machine)
-1.  **Install Splunk**: Follow the instructions in the `labs` repository to install Splunk.
-2.  **Start Juice Shop**: Use the Docker Compose file in the `labs` repository to start the application.
-    ```bash
-    # From the 'labs' repo
-    docker-compose -f docker/juice-shop/docker-compose.yml up -d
-    ```
+### Step 2: Set Up the Target Environment (Ubuntu Server VM)
+
+1.  Create a new Ubuntu Server VM in VirtualBox.
+2.  Install Docker and Docker Compose.
+3.  Use the Docker Compose file in the `labs` repository to start the
+    Juice Shop application.
+    `bash     # From the 'labs' repo on the Target VM     docker-compose -f docker/juice-shop/docker-compose.yml up -d`
+4.  Configure `auditd` for host-level logging as per the Day 1 plan.
 
 ### Step 3: Set Up the Attacker Environment (Kali VM)
+
 1.  Create a Kali Linux VM in VirtualBox.
-2.  Configure two network adapters: one **NAT** (for internet) and one **Host-Only** (for the lab network).
-3.  Clone the `pentest` repository into the Kali VM.
+2.  Configure two network adapters: one **NAT** (for internet) and one
+    **Host-Only** (to connect to the Target VM).
 
-### Step 4: Run the Attack & Defend Scenario
-1.  Follow the procedures in the `pentest` repository to perform the baseline scan and exploits.
-2.  Follow the procedures in the `siem-lab` repository to forward logs from the Juice Shop container to Splunk and observe the attack traffic.
+### Step 4: Run the Red + Blue Team Exercises
 
----
+1.  Follow the daily procedures in the 30-day plan, using the Kali VM
+    for attacks.
+2.  Document all findings in the `pentest` repo and all detections in
+    the `siem-lab` repo from your Main OS.
+
+------------------------------------------------------------------------
 
 ## 4. Threat Model
 
-A threat model was developed for the OWASP Juice Shop application using the **STRIDE** framework to identify potential security risks.
-
-| Threat Category | Description | Scenario for Juice Shop |
+A threat model was developed for the environment using the **STRIDE**
+framework.
+     -------------------------------------------------------------------
+| Threat Category | Description | Scenario for This Project |
 | :--- | :--- | :--- |
-| **S**poofing | An attacker illegitimately assumes the identity of another user. | An attacker uses a SQL Injection vulnerability on the login page to bypass authentication and log in as the administrator. |
-| **T**ampering | An attacker modifies data on the system. | After gaining admin access via SQLi, an attacker could modify product prices, delete users, or alter application data. |
-| **R**epudiation | An attacker performs malicious actions in a way that cannot be traced back to them. | Insufficient logging could allow an attacker to deface the site or steal data without leaving a clear audit trail of their specific actions. |
-| **I**nformation Disclosure | An attacker gains access to sensitive or private information. | The SQLi vulnerability allows an attacker to access all data in the database, including user emails, passwords, and personal information. |
-| **D**enial of Service | An attacker makes a system or service unavailable to legitimate users. | An attacker could potentially find a vulnerability (e.g., a ReDoS or resource exhaustion flaw) that crashes the application server, making the shop unavailable. |
-| **E**levation of Privilege | An attacker with limited user access gains higher-level (e.g., admin) permissions. | This is the primary result of the SQLi vulnerability, where an anonymous user elevates their privileges to that of a full administrator. |
+| **S**poofing | An attacker illegitimately assumes the identity of another user. | An attacker could steal a valid session token (JWT) via a Cross-Site Scripting (XSS) vulnerability and use it to impersonate a logged-in user. |
+| **T**ampering | An attacker modifies data on the system. | An attacker exploits a file upload vulnerability to upload a malicious script to the `/ftp` directory, altering the web server's content. |
+| **R**epudiation | An attacker performs malicious actions in a way that cannot be traced back to them. | Without proper host-level logging (`auditd`), an attacker who gains root access could install a rootkit and erase their command history. |
+| **I**nformation Disclosure | An attacker gains access to sensitive or private information. | An attacker exploits an Insecure Direct Object Reference (IDOR) in the basket API to view the contents of other users' shopping carts. |
+| **D**enial of Service | An attacker makes a system or service unavailable to legitimate users. | An aggressive directory scan using a tool like `gobuster` could overwhelm the Node.js process, causing the application to crash and become temporarily unavailable. |
+| **E**levation of Privilege | An attacker with limited user access gains higher-level permissions. | An attacker with a low-privilege shell on the Ubuntu VM could exploit a misconfigured `sudo` rule to execute commands as the root user. |
+     -------------------------------------------------------------------
 
----
+------------------------------------------------------------------------
 
-## 5. Mitigation Plan & Implemented Fixes
+## 5. Detection & Hardening Plan
 
-Based on the threat model and the penetration test findings, the following mitigations were implemented and verified.
+Instead of fixing source code, this project focused on detecting and
+responding to threats. The following are examples of detections
+developed during the project.
 
-### 5.1. SQL Injection (Spoofing, Tampering, Information Disclosure, Elevation of Privilege)
+### 5.1. Web Reconnaissance (Directory Enumeration)
 
-* **Threat**: An attacker can bypass the login page to gain administrator access.
-* **Implemented Fix**: The vulnerable login function was replaced with a secure mock endpoint that performs strict string comparisons instead of building a raw SQL query. In a real-world scenario, this would be implemented using **parameterized queries**.
-* **Evidence**:
-    * **Commit with Fix**: [fix: harden demo app against XSS/SQLi](https://github.com/RezaAramjou/docker-app/commit/87b8b229cd235b3a30e05cca93fba66a0d62ca83)
-    * **Verification**: The fix was verified by re-testing the original SQLi payload, which was successfully rejected. This is documented in the [Penetration Test Report](https://github.com/RezaAramjou/pentest/blob/main/reports/juice-shop-report.md).
+-   **Threat**: An attacker uses a tool like `gobuster` to discover
+    hidden directories and API endpoints.
+-   **Detection**: A SIEM rule was developed to detect a high frequency
+    of requests to varied URLs from a single source IP. The rule is
+    designed to be SIEM-agnostic using a Sigma-like format.
+-   **Evidence**:
+    -   **Detection Rule**:
+        [siem-lab/rules/web-dirbusting.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/web-dirbusting.yml)
+    -   **Test Plan**:
+        [pentest/web/test-catalog.md](https://github.com/RezaAramjou/pentest/blob/main/web/test-catalog.md)
 
-### 5.2. Cross-Site Scripting (XSS) (Spoofing, Tampering)
+### 5.2. Insecure File Uploads
 
-* **Threat**: An attacker can inject malicious scripts into the application, which then execute in the browsers of other users, potentially leading to session hijacking.
-* **Implemented Fix**: Input sanitization was implemented using the `bleach` library to strip dangerous HTML from user input. Additionally, security headers (`X-XSS-Protection`) were added to all server responses to enable browser-level XSS filtering.
-* **Evidence**:
-    * **Commit with Fix**: [fix: harden demo app against XSS/SQLi](https://github.com/RezaAramjou/docker-app/commit/87b8b229cd235b3a30e05cca93fba66a0d62ca83)
-    * **Verification**: The fix was verified by re-submitting the original XSS payload. The script did not execute, proving the sanitization and headers are effective.
+-   **Threat**: An attacker uploads a web shell or other malicious
+    script disguised as an image file.
+-   **Detection**: A rule was created to alert on two conditions: 1) A
+    file is uploaded with a dangerous extension (e.g., `.php`,
+    `.sh`). 2) The file's extension (e.g., `.jpg`) does not match its
+    actual content (MIME type).
+-   **Evidence**:
+    -   **Detection Rule**:
+        [siem-lab/rules/suspicious-file-upload.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/suspicious-file-upload.yml)
 
-### 5.3. Insecure Network Exposure (Information Disclosure)
+### 5.3. Host-Level Privilege Escalation
 
-* **Threat**: The bastion host's SSH port was open to the entire internet (`0.0.0.0/0`), exposing it to brute-force attacks and automated scanning.
-* **Implemented Fix**: The Terraform configuration for the bastion host's security group was hardened to only allow SSH access from a specific, trusted IP address.
-* **Evidence**:
-    * **Commit with Fix**: [fix: tighten security group rules in terraform demo](https://github.com/RezaAramjou/terraform/commit/8409f8f2b7a2ed4566ff6b3bbd5ed5c7b76cae60)
+-   **Threat**: An attacker on the host enumerates SUID binaries or
+    abuses `sudo` privileges to gain root access.
+-   **Detection**: Detections were created to monitor for abnormal
+    `sudo` command patterns and suspicious process executions
+    originating from common enumeration scripts.
+-   **Evidence**:
+    -   **Detection Rule**:
+        [siem-lab/rules/linux-sudo-anomaly.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/linux-sudo-anomaly.yml)
+    -   **Pentest Notes**:
+        [pentest/linux/privesc-methods.md](https://github.com/RezaAramjou/pentest/blob/main/linux/privesc-methods.md)

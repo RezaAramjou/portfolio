@@ -6,6 +6,14 @@
 
 ------------------------------------------------------------------------
 
+## 1. Introduction & Project Goal
+
+The objective of this 30-day project was to demonstrate a comprehensive, hands-on methodology for modern penetration testing and defensive security monitoring. This was accomplished by executing a full-scope simulated attack against a target environment, paired with the development of high-fidelity detection rules for each technique used.
+
+This document provides an overview of the lab's architecture, a threat model of the target, a summary of the detection and hardening plan, and a full guide to reproducing the lab. The goal is to present a portfolio of repeatable offensive tradecraft and the corresponding defensive countermeasures.
+
+------------------------------------------------------------------------
+
 ## 2. Detailed Architecture
 
 The lab is comprised of three distinct components, simulating an
@@ -79,7 +87,7 @@ git clone https://github.com/RezaAramjou/siem-lab.git
 
 A threat model was developed for the environment using the **STRIDE**
 framework.
-     -------------------------------------------------------------------
+
 | Threat Category | Description | Scenario for This Project |
 | :--- | :--- | :--- |
 | **S**poofing | An attacker illegitimately assumes the identity of another user. | An attacker could steal a valid session token (JWT) via a Cross-Site Scripting (XSS) vulnerability and use it to impersonate a logged-in user. |
@@ -88,7 +96,7 @@ framework.
 | **I**nformation Disclosure | An attacker gains access to sensitive or private information. | An attacker exploits an Insecure Direct Object Reference (IDOR) in the basket API to view the contents of other users' shopping carts. |
 | **D**enial of Service | An attacker makes a system or service unavailable to legitimate users. | An aggressive directory scan using a tool like `gobuster` could overwhelm the Node.js process, causing the application to crash and become temporarily unavailable. |
 | **E**levation of Privilege | An attacker with limited user access gains higher-level permissions. | An attacker with a low-privilege shell on the Ubuntu VM could exploit a misconfigured `sudo` rule to execute commands as the root user. |
-     -------------------------------------------------------------------
+
 
 ------------------------------------------------------------------------
 

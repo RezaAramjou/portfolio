@@ -38,3 +38,16 @@
 | 26  | Finalized all repository READMEs for clarity and reproducibility   | N/A                                                                                   | ✅ Complete |
 | 27  | Wrote Full Capstone Document with Threat Model and Mitigations     | [Full Capstone](https://github.com/YourGitHubUsername/portfolio/blob/main/CAPSTONE_FULL.md) | ✅ Complete |
 | 28+ | Polished documentation and prepared job application materials      | [Cover Letters](https://github.com/YourGitHubUsername/job-kit/tree/main/cover-letters) | ✅ Complete |
+
+
+
+# 30-Day Pentesting Mastery Plan
+
+## Day 1: Lab Kickoff & OSINT Sandbox (2025-09-04)
+
+*Summary:* Kicked off the engagement by defining the scope, including a Juice Shop container and an Ubuntu VM, within a formal Rules of Engagement document. On the defensive side, I enabled `auditd` on the target VM to establish baseline host telemetry. This initial state was captured in documentation and a dashboard screenshot, providing a clean baseline for future threat detection.
+
+*Deliverables:*
+* `pentest/ROE.md`
+* `siem-lab/baseline/host-baseline.md`
+* `siem-lab/dashboards/baseline.png`

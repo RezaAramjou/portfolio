@@ -60,3 +60,12 @@
 * `pentest/recon/recon-notes.md`
 * `pentest/wordlists/custom.txt`
 * `siem-lab/rules/web-dirbusting.yml`
+
+## Day 3: Web Mapping & Auth Flows (2025-09-05)
+
+*Summary:* Set up Burp Suite to proxy and analyze the Juice Shop's web traffic. I successfully mapped the user registration and login flows, identifying that the application uses JWTs for session management. Key discoveries include a potential IDOR vulnerability in the basket API and a hidden `/ftp` directory, all of which have been documented.
+
+*Deliverables:*
+* `pentest/web/mapping.md`
+* `pentest/web/proxy-export.xml`
+* `siem-lab/parsers/web-headers.md`

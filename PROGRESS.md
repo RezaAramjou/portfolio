@@ -95,3 +95,10 @@
 * `pentest/api/inventory.md`
 * `pentest/api/api-test-plan.md`
 * `siem-lab/rules/api-ratelimit-breach.yml`
+
+## Day 7: Web/App Mini-Report & Hotfix Sprint (2025-09-06)
+
+*Summary:* Concluded Week 1 by consolidating all web and API findings into a concise mini-report. The report summarizes key vulnerabilities, including weak authentication, potential IDOR, and lack of rate limiting. As a Blue Team exercise, I documented three high-impact "hotfix" recommendations to mitigate the most critical risks discovered.
+
+*Deliverables:*
+* `pentest/reports/week1-web-mini-report.md`

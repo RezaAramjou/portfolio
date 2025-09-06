@@ -161,3 +161,10 @@ developed during the project.
 * **Evidence**:
     * **Detection Rule**: [siem-lab/rules/api-ratelimit-breach.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/api-ratelimit-breach.yml)
     * **Test Plan**: [pentest/api/api-test-plan.md](https://github.com/RezaAramjou/pentest/blob/main/api/api-test-plan.md)
+    
+    
+### 5.6. Week 1 Summary: Web & API Findings
+
+* **Summary**: The initial week of testing focused on the web application and its API. The assessment revealed several high-risk vulnerabilities, including weak authentication controls (no lockout, poor password policy) and a critical Insecure Direct Object Reference (IDOR) vulnerability in the basket functionality.
+* **Evidence**:
+    * **Week 1 Report**: [pentest/reports/week1-web-mini-report.md](https://github.com/RezaAramjou/pentest/blob/main/reports/week1-web-mini-report.md)

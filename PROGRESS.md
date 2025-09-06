@@ -119,3 +119,10 @@
 *Deliverables:*
 * `pentest/linux/privesc-methods.md`
 * `siem-lab/rules/linux-sudo-anomaly.yml`
+
+## Rule Refinement Session (2025-09-07)
+
+*Summary:* Took an extra session to iterate on all existing SIEM rules. I upgraded each of the six detections to a more professional, production-ready standard with better filtering for noise reduction and more comprehensive logic to improve accuracy.
+
+*Deliverables:*
+* N/A (Upgraded existing files in `siem-lab/rules/`)

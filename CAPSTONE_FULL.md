@@ -153,3 +153,11 @@ developed during the project.
         * [siem-lab/rules/auth-brute.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/auth-brute.yml)
         * [siem-lab/rules/auth-token-anomaly.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/auth-token-anomaly.yml)
     * **Pentest Findings**: [pentest/web/auth-findings.md](https://github.com/RezaAramjou/pentest/blob/main/web/auth-findings.md)
+
+### 5.5. API Security (IDOR & Rate Limiting)
+
+* **Threat**: An attacker could abuse API endpoints to steal other users' data (IDOR), or overwhelm the application with automated requests to find vulnerabilities or cause a denial of service.
+* **Detection**: A rule was created to detect a high volume of requests to API-specific paths (e.g., `/api/*`, `/rest/*`) from a single source IP, indicating potential abuse.
+* **Evidence**:
+    * **Detection Rule**: [siem-lab/rules/api-ratelimit-breach.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/api-ratelimit-breach.yml)
+    * **Test Plan**: [pentest/api/api-test-plan.md](https://github.com/RezaAramjou/pentest/blob/main/api/api-test-plan.md)

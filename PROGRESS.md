@@ -86,3 +86,12 @@
 * `pentest/web/auth-findings.md`
 * `siem-lab/rules/auth-brute.yml`
 * `siem-lab/rules/auth-token-anomaly.yml`
+
+## Day 6: API Security (REST/JSON) (2025-09-06)
+
+*Summary:* Focused on the application's API security. I created a comprehensive inventory of all discovered API endpoints and then developed a methodical test plan to check for common vulnerabilities like IDOR, rate-limiting issues, and mass assignment. To counter these threats, I designed a SIEM rule to detect API abuse by monitoring for an abnormally high volume of requests from a single source.
+
+*Deliverables:*
+* `pentest/api/inventory.md`
+* `pentest/api/api-test-plan.md`
+* `siem-lab/rules/api-ratelimit-breach.yml`

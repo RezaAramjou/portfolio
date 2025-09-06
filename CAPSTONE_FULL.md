@@ -133,11 +133,15 @@ developed during the project.
 
 ### 5.3. Host-Level Privilege Escalation
 
-* **Threat**: An attacker with a low-privilege shell on the host enumerates SUID binaries or abuses `sudo` privileges to gain root access.
-* **Detection**: Detections were created to monitor for the specific commands used to find SUID binaries (`find / -perm -u=s`) or create new ones (`chmod u+s`).
+* **Threat**: An attacker on the host enumerates SUID binaries or abuses `sudo` privileges to gain root access.
+* **Detection**: Detections were created to monitor for the specific commands used to find SUID binaries (`find / -perm -u=s`) and to detect abnormal `sudo` command patterns, such as spawning a root shell.
 * **Evidence**:
-    * **Detection Rule**: [siem-lab/rules/linux-suid-hunting.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/linux-suid-hunting.yml)
-    * **Pentest Checklist**: [pentest/linux/enum-checklist.md](https://github.com/RezaAramjou/pentest/blob/main/linux/enum-checklist.md)
+    * **Detection Rules**:
+        * [siem-lab/rules/linux-suid-hunting.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/linux-suid-hunting.yml)
+        * [siem-lab/rules/linux-sudo-anomaly.yml](https://github.com/RezaAramjou/siem-lab/blob/main/rules/linux-sudo-anomaly.yml)
+    * **Pentest Notes**:
+        * [pentest/linux/enum-checklist.md](https://github.com/RezaAramjou/pentest/blob/main/linux/enum-checklist.md)
+        * [pentest/linux/privesc-methods.md](https://github.com/RezaAramjou/pentest/blob/main/linux/privesc-methods.md)
         
 ### 5.4. Authentication & Session Security
 

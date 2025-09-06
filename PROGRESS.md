@@ -111,3 +111,11 @@
 *Deliverables:*
 * `pentest/linux/enum-checklist.md`
 * `siem-lab/rules/linux-suid-hunting.yml`
+
+## Day 9: Linux Privilege Escalation Lab (2025-09-06)
+
+*Summary:* Performed hands-on privilege escalation on the target Linux VM. I successfully escalated to root by abusing overly permissive `sudo` rights and by leveraging my user's membership in the `docker` group, documenting the methodology for each. In response, I created a SIEM rule to detect anomalous `sudo` usage, specifically looking for commands that spawn interactive root shells.
+
+*Deliverables:*
+* `pentest/linux/privesc-methods.md`
+* `siem-lab/rules/linux-sudo-anomaly.yml`

@@ -102,3 +102,12 @@
 
 *Deliverables:*
 * `pentest/reports/week1-web-mini-report.md`
+
+
+## Day 8: Linux Foothold & Basics (2025-09-06)
+
+*Summary:* Shifted focus to host-level security by performing an initial enumeration of the target Ubuntu VM. This process revealed several critical privilege escalation paths, including full `sudo` privileges and membership in the `docker` and `lxd` groups. I documented this enumeration process in a reusable checklist and created a corresponding Blue Team rule to detect SUID enumeration, a common attacker technique.
+
+*Deliverables:*
+* `pentest/linux/enum-checklist.md`
+* `siem-lab/rules/linux-suid-hunting.yml`
